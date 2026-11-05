@@ -29,7 +29,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .r{padding:8px 0;border-top:1px solid var(--bd);font-size:15px}
 .r span{color:var(--ok)}
 .g{background:none;border:1px solid var(--bd);border-radius:10px;padding:12px;width:100%;margin-top:10px}
-</style></head><body><div class="w" id="app"></div>
+.lv{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--okbg);color:var(--tx);text-align:center;font-weight:600}
+.ft{text-align:center;color:var(--mu);font-size:14px;padding:0 16px 24px}
+</style></head><body><div class="w" id="app"></div><div class="ft">Made with 💗 by Austin pogi</div>
 <script>
 // [handout, question, correct, wrong, wrong, wrong]
 const Q=[
@@ -80,7 +82,7 @@ const app=document.getElementById("app");
 const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 let list=[],i=0,score=0,missed=[],done=false;
 function home(){
-  app.innerHTML='<h1>Reviewer Quiz</h1><p class="s">Multiple choice. Pick a handout to start.</p>'+
+  app.innerHTML='<h1>Reviewer Quiz</h1><p class="s">Multiple choice. Pick a handout to start.<br>You’ve got this, I love you 💕</p>'+
   '<button class="m" data-h="4"><b>Handout 4</b><br>A World of Ideas ('+Q.filter(q=>q[0]==4).length+' questions)</button>'+
   '<button class="m" data-h="5"><b>Handout 5</b><br>Global Population and Mobility ('+Q.filter(q=>q[0]==5).length+' questions)</button>'+
   '<button class="m" data-h="0"><b>Both handouts</b><br>Mixed ('+Q.length+' questions)</button>';
@@ -106,10 +108,10 @@ function pick(b,t,q){
 }
 function end(){
   const p=Math.round(score/list.length*100);
-  let h='<h1>Results</h1><div class="c"><div class="big">'+score+' / '+list.length+'</div><p class="s" style="text-align:center">'+p+'%</p>';
+  let h='<h1>Results</h1><div class="c"><div class="big">'+score+' / '+list.length+'</div><p class="s" style="text-align:center">'+p+'%</p><div class="lv">'+(p>=80?'So proud of you, my smart girl! I love you so much 💖':p>=50?'Nice job, love! Keep going, I love you 💕':'It’s okay, love. Try again, I’m always cheering for you. I love you 🥰')+'</div>';
   if(missed.length){h+='<b>Review these:</b>';missed.forEach(q=>{h+='<div class="r"></div>'})}
   else h+='<p style="text-align:center">Perfect score!</p>';
-  h+='</div>'+(missed.length?'<button class="n" id="rm">Retry missed ('+missed.length+')</button>':'')+'<button class="g" id="hm">Back to start</button>';
+  h+='<p class="s" style="text-align:center;margin-top:14px">💌 I love you always. -Austin pogi</p></div>'+(missed.length?'<button class="n" id="rm">Retry missed ('+missed.length+')</button>':'')+'<button class="g" id="hm">Back to start</button>';
   app.innerHTML=h;
   app.querySelectorAll(".r").forEach((d,k)=>{d.innerHTML="";d.append(missed[k][1]+" ");const s=document.createElement("span");s.textContent="\u2192 "+missed[k][2];d.appendChild(s)});
   const r=document.getElementById("rm");if(r){const m=missed.slice();r.onclick=()=>start(0,m)}
