@@ -31,6 +31,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .g{background:none;border:1px solid var(--bd);border-radius:10px;padding:12px;width:100%;margin-top:10px}
 .lv{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--okbg);color:var(--tx);text-align:center;font-weight:600}
 .ft{text-align:center;color:var(--mu);font-size:14px;padding:0 16px 24px}
+.fc{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;width:100%;min-height:220px;font-size:19px;font-weight:600}
+.fc small{font-size:13px;font-weight:400;color:var(--mu);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em}
+.fc.b{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.fn{display:flex;gap:10px;margin-top:12px}
+.fn button{flex:1;margin:0}
 </style></head><body><div class="w" id="app"></div><div class="ft">Made with 💗 by Austin pogi</div>
 <script>
 // [handout, question, correct, wrong, wrong, wrong]
@@ -85,8 +90,13 @@ function home(){
   app.innerHTML='<h1>Reviewer Quiz</h1><p class="s">Multiple choice. Pick a handout to start.<br>You’ve got this, I love you 💕</p>'+
   '<button class="m" data-h="4"><b>Handout 4</b><br>A World of Ideas ('+Q.filter(q=>q[0]==4).length+' questions)</button>'+
   '<button class="m" data-h="5"><b>Handout 5</b><br>Global Population and Mobility ('+Q.filter(q=>q[0]==5).length+' questions)</button>'+
-  '<button class="m" data-h="0"><b>Both handouts</b><br>Mixed ('+Q.length+' questions)</button>';
-  app.querySelectorAll(".m").forEach(b=>b.onclick=()=>start(+b.dataset.h));
+  '<button class="m" data-h="0"><b>Both handouts</b><br>Mixed ('+Q.length+' questions)</button>'+
+  '<p class="s" style="margin-top:20px">Flashcards</p>'+
+  '<button class="m" data-f="4"><b>Handout 4 cards</b><br>A World of Ideas</button>'+
+  '<button class="m" data-f="5"><b>Handout 5 cards</b><br>Global Population and Mobility</button>'+
+  '<button class="m" data-f="0"><b>Both handouts cards</b><br>Mixed</button>';
+  app.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>start(+b.dataset.h));
+  app.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>cards(+b.dataset.f));
 }
 function start(h,set){list=sh(set||Q.filter(q=>!h||q[0]==h));i=0;score=0;missed=[];show()}
 function show(){
@@ -116,6 +126,21 @@ function end(){
   app.querySelectorAll(".r").forEach((d,k)=>{d.innerHTML="";d.append(missed[k][1]+" ");const s=document.createElement("span");s.textContent="\u2192 "+missed[k][2];d.appendChild(s)});
   const r=document.getElementById("rm");if(r){const m=missed.slice();r.onclick=()=>start(0,m)}
   document.getElementById("hm").onclick=home;
+}
+function cards(h){
+  const d=sh(Q.filter(q=>!h||q[0]==h));let k=0,flip=false;
+  function draw(){
+    const q=d[k];
+    app.innerHTML='<div class="t"><span>Card '+(k+1)+' of '+d.length+'</span><span>Tap card to flip</span></div><div class="p"><i style="width:'+((k+1)/d.length*100)+'%"></i></div><button class="c fc" id="fc"></button><div class="fn"><button class="g" id="pv">Previous</button><button class="n" id="nx">Next</button></div><button class="g" id="hm">Back to start</button>';
+    const fc=document.getElementById("fc");
+    const paint=()=>{fc.className="c fc"+(flip?" b":"");fc.innerHTML="";const s=document.createElement("small");s.textContent=flip?"Answer":"Question";const t=document.createElement("div");t.textContent=flip?q[2]:q[1];fc.append(s,t)};
+    paint();
+    fc.onclick=()=>{flip=!flip;paint()};
+    document.getElementById("pv").onclick=()=>{k=(k-1+d.length)%d.length;flip=false;draw()};
+    document.getElementById("nx").onclick=()=>{k=(k+1)%d.length;flip=false;draw()};
+    document.getElementById("hm").onclick=home;
+  }
+  draw();
 }
 home();
 </script></body></html>
