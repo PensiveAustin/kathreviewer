@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Handout 4 and 5 Quiz</title>
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--tx:#1b2430;--mu:#5b6675;--ac:#1f3a5f;--bd:#d3dae4;--ok:#1b7f4b;--okbg:#e3f5ea;--no:#b3261e;--nobg:#fbe7e5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10151c;--card:#1a212b;--tx:#e8edf3;--mu:#9aa7b8;--ac:#7fb0ee;--bd:#2d3846;--ok:#6fd49a;--okbg:#16301f;--no:#ff8a80;--nobg:#3a1c1a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10151c;--card:#1a212b;--tx:#e8edf3;--mu:#9aa7b8;--ac:#7fb0ee;--bd:#2d3846;--ok:#6fd49a;--okbg:#16301f;--no:#ff8a80;--nobg:#3a1c1a;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:640px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:24px;margin:8px 0 4px;color:var(--ac)}
+p.s{color:var(--mu);margin:0 0 16px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px}
+button{font:inherit;color:inherit;cursor:pointer}
+.m{display:block;width:100%;text-align:left;padding:14px;margin:0 0 10px;border:1px solid var(--bd);border-radius:12px;background:var(--card)}
+.m b{color:var(--ac)}
+.o{display:block;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+.o:hover:not(:disabled){border-color:var(--ac)}
+.o.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.o.no{background:var(--nobg);border-color:var(--no);color:var(--no)}
+.o:disabled{cursor:default}
+.p{height:6px;background:var(--bd);border-radius:3px;margin-bottom:14px;overflow:hidden}
+.p i{display:block;height:100%;background:var(--ac);width:0;transition:width .2s}
+.t{display:flex;justify-content:space-between;color:var(--mu);font-size:14px;margin-bottom:6px}
+.q{font-size:18px;font-weight:600;margin:6px 0 10px}
+.n{display:block;width:100%;margin-top:12px;padding:13px;border:0;border-radius:10px;background:var(--ac);color:var(--bg);font-weight:600}
+.big{font-size:44px;font-weight:700;color:var(--ac);text-align:center;margin:4px 0}
+.r{padding:8px 0;border-top:1px solid var(--bd);font-size:15px}
+.r span{color:var(--ok)}
+.g{background:none;border:1px solid var(--bd);border-radius:10px;padding:12px;width:100%;margin-top:10px}
+</style></head><body><div class="w" id="app"></div>
+<script>
+// [handout, question, correct, wrong, wrong, wrong]
+const Q=[
+[4,"The ways media content is produced, distributed, and consumed globally","Global media cultures","Media literacy","Hybridization","Platform dominance"],
+[4,"A small number of companies and countries shaping most of the world's media is called","Media imperialism / platform dominance","Cultural homogenization","Religious syncretism","Interfaith dialogue"],
+[4,"Which skill is essential because rapid news circulation spreads misinformation?","Media literacy","Cultural appropriation","Syncretism","Hybridization"],
+[4,"Bollywood films and Korean dramas gaining international popularity is an example of","Cultural exchange through entertainment","Echo chambers","Platform dominance","Religious politics"],
+[4,"Dominant cultural products overshadowing local industries is called","Cultural homogenization","Hybridization","Cultural competence","Media representation"],
+[4,"Algorithms that curate content based on user preferences can reinforce","Echo chambers and polarization","Media literacy","Interfaith dialogue","Global awareness"],
+[4,"Which movements were spread through Twitter and Facebook?","Arab Spring and #MeToo","#EndSARS and Rohingya","Marvel and Star Wars","Coursera and edX"],
+[4,"The blending of cultures, like the global popularity of K-pop, is called","Hybridization","Homogenization","Syncretism","Imperialism"],
+[4,"Debates arise when local practices are commercialized or misrepresented on global platforms. This is about","Cultural appropriation","Media literacy","Religious politics","Global awareness"],
+[4,"#EndSARS is a movement from which country?","Nigeria","Myanmar","Philippines","India"],
+[4,"The Rohingya crisis took place in","Myanmar","Nigeria","Philippines","United States"],
+[4,"Black Lives Matter used social media to highlight","Police brutality and systemic racism","Sexual harassment and assault","Religious extremism","Misinformation"],
+[4,"The #MeToo movement brought attention to","Sexual harassment and assault","Police brutality","Cultural appropriation","Media imperialism"],
+[4,"The spread and interaction of religious beliefs, practices, and institutions across cultures is","Globalization of religion","Religious syncretism","Interfaith dialogue","Religious politics"],
+[4,"The blending of different religious traditions is","Religious Syncretism","Interfaith Dialogue","Cultural Diversity","Religious Politics"],
+[4,"Which promotes understanding, peace, and cooperation between religious groups?","Interfaith Dialogue","Religious Politics","Religious Syncretism","Cultural homogenization"],
+[4,"Global religious networks influencing elections and policymaking is","Religious Politics","Interfaith Dialogue","Cultural Diversity","Syncretism"],
+[4,"Employers value this when applicants understand diverse religious practices","Cultural Sensitivity","Media Imperialism","Platform Dominance","Echo Chambers"],
+[4,"Coursera, edX, and Khan Academy are examples of which media type?","Educational","News","Entertainment","Social"],
+[5,"Which is NOT a characteristic of a global city?","Remittances","Economic Power","Cultural Influence","Innovation"],
+[5,"Which Philippine city is the business hub of Metro Manila?","Makati City","Quezon City","Manila","Taguig City"],
+[5,"The largest area in Metro Manila, hosting most government offices","Quezon City","Makati City","Taguig City","Manila"],
+[5,"Taguig is becoming a business hub largely because of","Fort Bonifacio Global City and the Philippine Stock Exchange","Government offices only","Entertainment centers","BPOs only"],
+[5,"The capital that is the seat of the national government, established since the 16th century","Manila","Makati City","Quezon City","Taguig City"],
+[5,"The most commonly cited reason for social inequality in global cities","Redlining","Brain drain","Urban sprawl","Remittances"],
+[5,"The urban heat island effect is caused by heat absorbed and retained by","Concrete, asphalt, and buildings","Oceans","Forests","Remittances"],
+[5,"Which is an adaptation and mitigation strategy?","Green Infrastructure","Urban sprawl","Brain drain","Redlining"],
+[5,"The global population growth rate is estimated at about","1.1% per year","5% per year","0.1% per year","10% per year"],
+[5,"Which region has the highest population growth rate?","Sub-Saharan Africa","Europe","East Asia","North America"],
+[5,"The global population is expected to reach about ___ by 2050","9.7 billion","7.0 billion","12 billion","5 billion"],
+[5,"Aging populations are mostly in developed countries and lead to challenges in","Healthcare, pensions, and labor shortages","High dependency ratio and demand for education","Brain drain only","Rural to urban migration"],
+[5,"Youthful populations in developing countries lead to","High dependency ratio and demand for education and employment","Labor shortages","Pension problems","Negative population growth"],
+[5,"The movement of people across borders for economic opportunities, conflict, and environmental factors","Global migration","Urbanization","Demography","Globalization of religion"],
+[5,"Migrating to join family members already settled in another country","Family Reunification","Labor","Asylum","Environmental"],
+[5,"Fleeing persecution and protected under international refugee law","Asylum","Labor","Environmental","Unauthorized"],
+[5,"Migrating because of droughts, flooding, or sea-level rise","Environmental","Asylum","Labor","Family Reunification"],
+[5,"Disparities in income and job opportunities between countries drive","Labor migration","Asylum","Family reunification","Urbanization"],
+[5,"Filipinos working in the US, Saudi Arabia, and the UAE are called","Overseas Filipino Workers (OFWs)","Expatriates","Asylum seekers","Unauthorized migrants"],
+[5,"A con for the sending country","Brain drain (loss of skilled labor)","Remittances","Cultural diversity","Filling labor shortages"],
+[5,"A pro for the sending country","Remittances boost local economies","Brain drain","Pressure on public services","Social cohesion problems"],
+[5,"The Global Compact for Migration aims to manage migration","Safely, orderly, and regularly","Strictly and quickly","Only for talent","Only for refugees"],
+[5,"Foreign expatriates in the Philippines who work solely for retirement are an example of","Foreigners migrating into the country","OFWs","Brain drain","Asylum"]
+];
+const app=document.getElementById("app");
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let list=[],i=0,score=0,missed=[],done=false;
+function home(){
+  app.innerHTML='<h1>Reviewer Quiz</h1><p class="s">Multiple choice. Pick a handout to start.</p>'+
+  '<button class="m" data-h="4"><b>Handout 4</b><br>A World of Ideas ('+Q.filter(q=>q[0]==4).length+' questions)</button>'+
+  '<button class="m" data-h="5"><b>Handout 5</b><br>Global Population and Mobility ('+Q.filter(q=>q[0]==5).length+' questions)</button>'+
+  '<button class="m" data-h="0"><b>Both handouts</b><br>Mixed ('+Q.length+' questions)</button>';
+  app.querySelectorAll(".m").forEach(b=>b.onclick=()=>start(+b.dataset.h));
+}
+function start(h,set){list=sh(set||Q.filter(q=>!h||q[0]==h));i=0;score=0;missed=[];show()}
+function show(){
+  const q=list[i],opts=sh(q.slice(2));done=false;
+  app.innerHTML='<div class="t"><span>Question '+(i+1)+' of '+list.length+'</span><span>Score: '+score+'</span></div>'+
+  '<div class="p"><i style="width:'+(i/list.length*100)+'%"></i></div><div class="c"><div class="q"></div><div id="o"></div><div id="x"></div></div>';
+  app.querySelector(".q").textContent=q[1];
+  const o=document.getElementById("o");
+  opts.forEach(t=>{const b=document.createElement("button");b.className="o";b.textContent=t;b.onclick=()=>pick(b,t,q);o.appendChild(b)});
+}
+function pick(b,t,q){
+  if(done)return;done=true;
+  const ok=t===q[2];if(ok)score++;else missed.push(q);
+  b.classList.add(ok?"ok":"no");
+  document.querySelectorAll(".o").forEach(x=>{x.disabled=true;if(x.textContent===q[2])x.classList.add("ok")});
+  const n=document.createElement("button");n.className="n";n.textContent=i+1<list.length?"Next":"See results";
+  n.onclick=()=>{i++;i<list.length?show():end()};
+  document.getElementById("x").appendChild(n);n.focus();
+}
+function end(){
+  const p=Math.round(score/list.length*100);
+  let h='<h1>Results</h1><div class="c"><div class="big">'+score+' / '+list.length+'</div><p class="s" style="text-align:center">'+p+'%</p>';
+  if(missed.length){h+='<b>Review these:</b>';missed.forEach(q=>{h+='<div class="r"></div>'})}
+  else h+='<p style="text-align:center">Perfect score!</p>';
+  h+='</div>'+(missed.length?'<button class="n" id="rm">Retry missed ('+missed.length+')</button>':'')+'<button class="g" id="hm">Back to start</button>';
+  app.innerHTML=h;
+  app.querySelectorAll(".r").forEach((d,k)=>{d.innerHTML="";d.append(missed[k][1]+" ");const s=document.createElement("span");s.textContent="\u2192 "+missed[k][2];d.appendChild(s)});
+  const r=document.getElementById("rm");if(r){const m=missed.slice();r.onclick=()=>start(0,m)}
+  document.getElementById("hm").onclick=home;
+}
+home();
+</script></body></html>
